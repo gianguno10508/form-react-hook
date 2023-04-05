@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.icon {
+  max-width: 50px;
+  border: 1px solid rgba(111, 111, 111, 0.23);
+  border-radius: 8px;
+}
+.top-form {
+  margin-bottom: 10px;
+}
