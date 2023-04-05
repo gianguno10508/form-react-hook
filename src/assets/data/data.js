@@ -13,12 +13,13 @@ export const month = [
   "Dec",
 ];
 
-const years = function(startYear) {
-    var currentYear = new Date().getFullYear(), years = [];
-    startYear = startYear || 1980;  
-    while ( startYear <= currentYear ) {
-        years.push(startYear++);
-    }   
-    return years;
-}
+const years = function (startYear) {
+  var currentYear = new Date().getFullYear(),
+    years = [];
+  startYear = startYear || currentYear;
+  while (startYear <= currentYear + 20) {
+    years.push(startYear++);
+  }
+  return years;
+};
 export const yearList = years();
