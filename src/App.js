@@ -3,9 +3,10 @@ import { FormProvider, useForm } from "react-hook-form";
 import Dropdown from "./components/Dropdown";
 import TextFieldCustom from "./components/TextField";
 import { month, yearList } from "./assets/data/data";
-import { Container, TextField } from "@material-ui/core";
+import { Button, Container, TextField } from "@material-ui/core";
 import Grid from "@mui/material/Grid";
 import MasterCard from "../src/assets/icons/Mastercard-Logo.wine.svg";
+
 
 function App() {
   const methods = useForm();
@@ -30,6 +31,7 @@ function App() {
             <Grid item md={6} sm={12} xs={12}>
               <TextFieldCustom
                 name="card"
+                valueAsNumber="true"
                 label="Card number"
                 iconEnd={MasterCard}
               />
@@ -41,19 +43,27 @@ function App() {
               <Dropdown name="year" labelName="Exp. year" data={yearList} />
             </Grid>
             <Grid item md={2} sm={4} xs={12}>
-              <TextFieldCustom label="CVC Code" name="code" />
+              <TextFieldCustom
+                type="text"
+                valueAsNumber="false"
+                label="CVC Code"
+                name="code"
+              />
             </Grid>
           </Grid>
-          <Grid>
+          <Grid className="bottom-form">
             <Grid item md={12} sm={12}>
               <TextFieldCustom
+                type="text"
                 name="address"
+                valueAsNumber="false"
                 label="Billing address"
                 placeholder="2118 Thornride Cir. Syracuse, Connecticut 35624"
               />
             </Grid>
           </Grid>
-          <input type="submit" />
+          <Button className="submit-btn" type="submit" variant="outlined">Submit</Button>
+          {/* <input type="submit" /> */}
         </Container>
       </FormProvider>
     </div>
