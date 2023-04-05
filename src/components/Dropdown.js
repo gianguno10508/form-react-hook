@@ -12,19 +12,19 @@ const Dropdown = (props) => {
   const { register } = useFormContext();
 
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setValue(event.target.value);
+  // };
   return (
     <FormControl fullWidth variant="outlined">
       <InputLabel id="demo-simple-select-label">{props.labelName}</InputLabel>
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
-        value={value}
+        // value={value}
         {...register(props.name)}
         label={props.labelName}
-        onChange={handleChange}
+        // onChange={handleChange}
       >
         {props.data.map((e,i)=>(
             <MenuItem key={i} value={e}>{e}</MenuItem>
