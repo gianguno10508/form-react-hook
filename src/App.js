@@ -1,5 +1,5 @@
 import "./App.css";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import Dropdown from "./components/Dropdown";
 import TextFieldCustom from "./components/TextField";
 import { month, yearList } from "./assets/data/data";
@@ -8,65 +8,54 @@ import Grid from "@mui/material/Grid";
 import MasterCard from "../src/assets/icons/Mastercard-Logo.wine.svg";
 
 function App() {
-  const {
-    register,
-    handleSubmit,
-    formState: {
-      errors,
-      isDirty,
-      isSubmitting,
-      isSubmitted,
-      submitCount,
-      isValid,
-      isValidating,
-    },
-  } = useForm();
+  const methods = useForm();
   const onSubmit = (data) => console.log(data);
 
   return (
     <div className="App">
-      <Container
-        maxWidth="md"
-        component="form"
-        autoComplete="off"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <h2>Billing information</h2>
-        {/* <input {...register("test")} /> */}
-        <Grid
-          className="top-form"
-          container
-          spacing={1}
-          sx={{ display: "flex", mb: "5" }}
+      <FormProvider {...methods}>
+        <Container
+          maxWidth="md"
+          component="form"
+          autoComplete="off"
+          onSubmit={methods.handleSubmit(onSubmit)}
         >
-          <Grid item md={6}>
-            <input defaultValue="test" {...register("example")} />
-            <TextFieldCustom
-              {...register("rewrwer")}
-              label="Card number"
-              iconEnd={MasterCard}
-            />
+          <h2>Billing information</h2>
+          <Grid
+            className="top-form"
+            container
+            spacing={1}
+            sx={{ display: "flex", mb: "5" }}
+          >
+            <Grid item md={6} sm={12} xs={12}>
+              <TextFieldCustom
+                name="card"
+                label="Card number"
+                iconEnd={MasterCard}
+              />
+            </Grid>
+            <Grid item md={2} sm={4} xs={6}>
+              <Dropdown name="month" labelName="Exp. month" data={month} />
+            </Grid>
+            <Grid item md={2} sm={4} xs={6}>
+              <Dropdown name="year" labelName="Exp. year" data={yearList} />
+            </Grid>
+            <Grid item md={2} sm={4} xs={12}>
+              <TextFieldCustom label="CVC Code" name="code" />
+            </Grid>
           </Grid>
-          {/* <Grid item md={2}>
-            <Dropdown labelName="Exp. month" data={month} />
+          <Grid>
+            <Grid item md={12} sm={12}>
+              <TextFieldCustom
+                name="address"
+                label="Billing address"
+                placeholder="2118 Thornride Cir. Syracuse, Connecticut 35624"
+              />
+            </Grid>
           </Grid>
-          <Grid item md={2}>
-            <Dropdown labelName="Exp. year" data={yearList} />
-          </Grid>
-          <Grid item md={2}>
-            <TextFieldCustom label="CVC Code" />
-          </Grid> */}
-        </Grid>
-        {/* <Grid>
-          <Grid item md={12}>
-            <TextFieldCustom
-              labelName="Billing address"
-              placeholder="2118 Thornride Cir. Syracuse, Connecticut 35624"
-            />
-          </Grid>
-        </Grid> */}
-        <input type="submit" />
-      </Container>
+          <input type="submit" />
+        </Container>
+      </FormProvider>
     </div>
   );
 }

@@ -1,12 +1,13 @@
-import { FormControl, InputAdornment, TextField } from "@material-ui/core";
+import { InputAdornment, TextField } from "@material-ui/core";
+import { useFormContext } from "react-hook-form";
 
 const TextFieldCustom = ({ iconStart, iconEnd, InputProps, ...props }) => {
-  // console.log({...props});
+  const { register } = useFormContext();
   return (
     <TextField
       variant="outlined"
       fullWidth
-      // label={props.labelName}
+      {...register(props.name)}
       {...props}
       InputProps={{
         ...InputProps,

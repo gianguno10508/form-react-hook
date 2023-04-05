@@ -5,9 +5,12 @@ import {
   Select,
 } from "@material-ui/core";
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 const Dropdown = (props) => {
   const [value, setValue] = useState("");
+  const { register } = useFormContext();
+
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -19,6 +22,7 @@ const Dropdown = (props) => {
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={value}
+        {...register(props.name)}
         label={props.labelName}
         onChange={handleChange}
       >
